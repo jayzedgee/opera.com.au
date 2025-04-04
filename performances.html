@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Opera - Performances</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --dark: #222;
+            --light: #F5F5F5;
+            --cream: #FFF8E7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #6B0000;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #B8860B;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            height: 40vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522776203873-a1f79e18234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')  no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding-top: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background-color: var(--cream);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-group label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        
+        .filter-group select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .filter-button {
+            margin-left: auto;
+        }
+        
+        /* Performances Section */
+        .performances-section {
+            padding: 3rem 0;
+        }
+        
+        .performances-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+        
+        .performance-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .performance-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .performance-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .performance-content {
+            padding: 20px;
+        }
+        
+        .performance-content h3 {
+            color: var(--primary);
+        }
+        
+        .performance-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .performance-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        
+        .tag {
+            background-color: var(--cream);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Featured Performance */
+        .featured-performance {
+            background-color: var(--cream);
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+        
+        .featured-performance-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .featured-performance-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        .featured-performance-text h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .performance-details {
+            margin: 1.5rem 0;
+        }
+        
+        .performance-detail {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .performance-detail strong {
+            width: 120px;
+            color: var(--primary);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .pagination a.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .featured-performance-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-button {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Australian<span>Opera</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="venues.html">Venues</a></li>
+                    <li><a href="performances.html">Performances</a></li>
+                    <li><a href="opera-info.html">Opera Info</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Upcoming Opera Performances</h1>
+            <p>Discover and book tickets for the most captivating opera performances across Australia</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="venue">Venue:</label>
+                    <select id="venue">
+                        <option value="all">All Venues</option>
+                        <option value="sydney-opera-house">Sydney Opera House</option>
+                        <option value="arts-centre-melbourne">Arts Centre Melbourne</option>
+                        <option value="qpac-brisbane">QPAC Brisbane</option>
+                        <option value="capitol-theatre">Capitol Theatre Sydney</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="date">Date:</label>
+                    <select id="date">
+                        <option value="all">All Dates</option>
+                        <option value="this-week">This Week</option>
+                        <option value="this-month">This Month</option>
+                        <option value="next-month">Next Month</option>
+                        <option value="custom">Custom Date Range</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="genre">Genre:</label>
+                    <select id="genre">
+                        <option value="all">All Genres</option>
+                        <option value="classical">Classical</option>
+                        <option value="romantic">Romantic</option>
+                        <option value="contemporary">Contemporary</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="tragedy">Tragedy</option>
+                    </select>
+                </div>
+                
+                <div class="filter-button">
+                    <button class="btn">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Performance -->
+    <section class="featured-performance">
+        <div class="container">
+            <div class="featured-performance-content">
+                <div class="featured-performance-image" style="background-image: url('https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                <div class="featured-performance-text">
+                    <h2>La Traviata</h2>
+                    <p>Experience Verdi's masterpiece in a stunning new production featuring Australia's finest opera talents. This timeless tale of love and sacrifice comes to life with breathtaking sets and costumes.</p>
+                    
+                    <div class="performance-details">
+                        <div class="performance-detail">
+                            <strong>Dates:</strong>
+                            <span>May 15-30, 2025</span>
+                        </div>
+                        <div class="performance-detail">
+                            <strong>Venue:</strong>
+                            <span>Joan Sutherland Theatre, Sydney Opera House</span>
+                        </div>
+                        <div class="performance-detail">
+                            <strong>Duration:</strong>
+                            <span>2 hours 45 minutes, including one interval</span>
+                        </div>
+                        <div class="performance-detail">
+                            <strong>Language:</strong>
+                            <span>Sung in Italian with English surtitles</span>
+                        </div>
+                        <div class="performance-detail">
+                            <strong>Tickets from:</strong>
+                            <span>$79</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn">Book Tickets</a>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Performances -->
+    <section class="performances-section">
+        <div class="container">
+            <h2 class="section-title">All Upcoming Performances</h2>
+            <div class="performances-grid">
+                <div class="performance-card">
+                    <div class="performance-image" style="background-image: url('https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="performance-content">
+                        <h3>La Traviata</h3>
+                        <div class="performance-meta">
+                            <span>Sydney Opera House</span>
+                            <span>May 15-30, 2025</span>
+                        </div>
+                        <div class="performance-tags">
+                            <span class="tag">Romantic</span>
+                            <span class="tag">Tragedy</span>
+                        </div>
+                        <p>Experience Verdi's masterpiece in a stunning new production featuring Australia's finest opera talents.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+                
+                <div class="performance-card">
+                    <div class="performance-image" style="background-image: url('https://images.unsplash.com/photo-1522776203873-a1f79e18234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="performance-content">
+                        <h3>Carmen</h3>
+                        <div class="performance-meta">
+                            <span>Arts Centre Melbourne</span>
+                            <span>June 5-20, 2025</span>
+                        </div>
+                        <div class="performance-tags">
+                            <span class="tag">Romantic</span>
+                            <span class="tag">Tragedy</span>
+                        </div>
+                        <p>Bizet's fiery tale of passion and freedom comes to life in this vibrant production.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+                
+                <div class="performance-card">
+                    <div class="performance-image" style="background-image: url('https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="performance-content">
+                        <h3>The Magic Flute</h3>
+                        <div class="performance-meta">
+                            <span>QPAC Brisbane</span>
+                            <span>July 10-25, 2025</span>
+                        </div>
+                        <div class="performance-tags">
+                            <span class="tag">Classical</span>
+                            <span class="tag">Fantasy</span>
+                        </div>
+                        <p>Mozart's enchanting opera filled with magic, love, and wisdom in a spectacular production.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+                
+                <div class="performance-card">
+                    <div class="performance-image" style="background-image: url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="performance-content">
+                        <h3>Madama Butterfly</h3>
+                        <div class="performance-meta">
+                            <span>Sydney Opera House</span>
+                            <span>August 5-20, 2025</span>
+                        </div>
+                        <div class="performance-tags">
+                            <span class="tag">Romantic</span>
+                            <span class="tag">Tragedy</span>
+                        </div>
+                        <p>Puccini's heartbreaking tale of love, betrayal, and sacrifice in early 20th century Japan.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+                
+                <div class="performance-card">
+                    <div class="performance-image" style="background-image: url('https://images.unsplash.com/photo-1522776203873-a1f79e18234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="performance-content">
+                        <h3>The Barber of Seville</h3>
+                        <div class="performance-meta">
+                            <span>Arts Centre Melbourne</span>
+                            <span>September 10-25, 2025</span>
+                        </div>
+                        <div class="performance-tags">
+                            <span class="tag">Comedy</span>
+                            <span class="tag">Classical</span>
+                        </div>
+                        <p>Rossini's comic masterpiece full of disguises, trickery, and the famous "Figaro" aria.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+                
+                <div class="performance-card">
+                    <div class="performance-image" style="background-image: url('https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="performance-content">
+                        <h3>Don Giovanni</h3>
+                        <div class="performance-meta">
+                            <span>Capitol Theatre Sydney</span>
+                            <span>October 5-20, 2025</span>
+                        </div>
+                        <div class="performance-tags">
+                            <span class="tag">Classical</span>
+                            <span class="tag">Drama</span>
+                        </div>
+                        <p>Mozart's thrilling opera about the legendary seducer and his ultimate downfall.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">Next &raquo;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Australian Opera</h3>
+                    <p>Your premier destination for opera tickets and information across Australia.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="performances.html">Performances</a></li>
+                        <li><a href="opera-info.html">Opera Info</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Venues</h3>
+                    <ul>
+                        <li><a href="#">Sydney Opera House</a></li>
+                        <li><a href="#">Arts Centre Melbourne</a></li>
+                        <li><a href="#">QPAC Brisbane</a></li>
+                        <li><a href="#">Capitol Theatre Sydney</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@australianopera.com</li>
+                        <li>Phone: (02) 1234 5678</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Australian Opera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
