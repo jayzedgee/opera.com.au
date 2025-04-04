@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Opera - Venues</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --dark: #222;
+            --light: #F5F5F5;
+            --cream: #FFF8E7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #6B0000;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #B8860B;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            height: 40vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513279922550-250c2129b13a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')  no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding-top: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Venues Section */
+        .venues-section {
+            padding: 5rem 0;
+        }
+        
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+        
+        .venue-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .venue-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .venue-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .venue-content {
+            padding: 20px;
+        }
+        
+        .venue-content h3 {
+            color: var(--primary);
+        }
+        
+        .venue-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Featured Venue */
+        .featured-venue {
+            background-color: var(--cream);
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+        
+        .featured-venue-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .featured-venue-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        .featured-venue-text h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .venue-details {
+            margin: 1.5rem 0;
+        }
+        
+        .venue-detail {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .venue-detail strong {
+            width: 120px;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .featured-venue-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Australian<span>Opera</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="venues.html">Venues</a></li>
+                    <li><a href="performances.html">Performances</a></li>
+                    <li><a href="opera-info.html">Opera Info</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Opera Venues in Australia</h1>
+            <p>Discover the most prestigious venues hosting world-class opera performances</p>
+        </div>
+    </section>
+
+    <!-- Featured Venue -->
+    <section class="featured-venue">
+        <div class="container">
+            <div class="featured-venue-content">
+                <div class="featured-venue-image" style="background-image: url('https://images.unsplash.com/photo-1513279922550-250c2129b13a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                <div class="featured-venue-text">
+                    <h2>Sydney Opera House</h2>
+                    <p>The Sydney Opera House is not just the most famous building of the 20th century, but Sydney's home of opera. Climb the Monumental Steps as the sun sets over the harbor before enjoying a glass of champagne in the Northern Foyer of the Joan Sutherland Theatre, with its spectacular views of Sydney Harbour.</p>
+                    
+                    <div class="venue-details">
+                        <div class="venue-detail">
+                            <strong>Location:</strong>
+                            <span>Bennelong Point, Sydney, NSW 2000</span>
+                        </div>
+                        <div class="venue-detail">
+                            <strong>Main Spaces:</strong>
+                            <span>Concert Hall, Joan Sutherland Theatre, Drama Theatre, Playhouse, Studio</span>
+                        </div>
+                        <div class="venue-detail">
+                            <strong>Capacity:</strong>
+                            <span>Concert Hall: 2,679 | Joan Sutherland Theatre: 1,507</span>
+                        </div>
+                        <div class="venue-detail">
+                            <strong>Contact:</strong>
+                            <span>1300 764 849</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn">View Performances</a>
+                    <a href="#" class="btn btn-secondary">Book Tickets</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Venues -->
+    <section class="venues-section">
+        <div class="container">
+            <h2 class="section-title">All Opera Venues</h2>
+            <div class="venue-grid">
+                <div class="venue-card">
+                    <div class="venue-image" style="background-image: url('https://images.unsplash.com/photo-1513279922550-250c2129b13a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="venue-content">
+                        <h3>Sydney Opera House</h3>
+                        <div class="venue-meta">
+                            <span>Sydney, NSW</span>
+                            <span>5 Performance Spaces</span>
+                        </div>
+                        <p>Australia's most iconic performing arts venue and architectural masterpiece.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="venue-card">
+                    <div class="venue-image" style="background-image: url('https://images.unsplash.com/photo-1494870363241-b5225be3dada?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="venue-content">
+                        <h3>Arts Centre Melbourne</h3>
+                        <div class="venue-meta">
+                            <span>Melbourne, VIC</span>
+                            <span>State Theatre</span>
+                        </div>
+                        <p>Melbourne's premier performing arts venue hosting Opera Australia's Melbourne season.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="venue-card">
+                    <div class="venue-image" style="background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="venue-content">
+                        <h3>QPAC Brisbane</h3>
+                        <div class="venue-meta">
+                            <span>Brisbane, QLD</span>
+                            <span>Lyric Theatre</span>
+                        </div>
+                        <p>Queensland's cultural hub hosting major opera productions and performances.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="venue-card">
+                    <div class="venue-image" style="background-image: url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="venue-content">
+                        <h3>Capitol Theatre Sydney</h3>
+                        <div class="venue-meta">
+                            <span>Sydney, NSW</span>
+                            <span>Main Auditorium</span>
+                        </div>
+                        <p>Historic theatre hosting major musical and opera productions in Sydney.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="venue-card">
+                    <div class="venue-image" style="background-image: url('https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="venue-content">
+                        <h3>Her Majesty's Theatre</h3>
+                        <div class="venue-meta">
+                            <span>Adelaide, SA</span>
+                            <span>Main Auditorium</span>
+                        </div>
+                        <p>Adelaide's premier venue for opera and musical theatre productions.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="venue-card">
+                    <div class="venue-image" style="background-image: url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="venue-content">
+                        <h3>His Majesty's Theatre</h3>
+                        <div class="venue-meta">
+                            <span>Perth, WA</span>
+                            <span>Main Auditorium</span>
+                        </div>
+                        <p>Perth's historic Edwardian Baroque theatre hosting opera and ballet performances.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Australian Opera</h3>
+                    <p>Your premier destination for opera tickets and information across Australia.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="performances.html">Performances</a></li>
+                        <li><a href="opera-info.html">Opera Info</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Venues</h3>
+                    <ul>
+                        <li><a href="#">Sydney Opera House</a></li>
+                        <li><a href="#">Arts Centre Melbourne</a></li>
+                        <li><a href="#">QPAC Brisbane</a></li>
+                        <li><a href="#">Capitol Theatre Sydney</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@australianopera.com</li>
+                        <li>Phone: (02) 1234 5678</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Australian Opera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
