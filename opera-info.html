@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Opera - Opera Information</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --dark: #222;
+            --light: #F5F5F5;
+            --cream: #FFF8E7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #6B0000;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #B8860B;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Page Header */
+        .page-header {
+            height: 40vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')  no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding-top: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Opera Info Section */
+        .opera-info-section {
+            padding: 5rem 0;
+        }
+        
+        .opera-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+        
+        .opera-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .opera-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .opera-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .opera-content {
+            padding: 20px;
+        }
+        
+        .opera-content h3 {
+            color: var(--primary);
+        }
+        
+        .opera-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Featured Opera */
+        .featured-opera {
+            background-color: var(--cream);
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+        
+        .featured-opera-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .featured-opera-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        .featured-opera-text h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .opera-details {
+            margin: 1.5rem 0;
+        }
+        
+        .opera-detail {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .opera-detail strong {
+            width: 120px;
+            color: var(--primary);
+        }
+        
+        /* Opera Synopsis */
+        .opera-synopsis {
+            padding: 4rem 0;
+        }
+        
+        .synopsis-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .synopsis-content h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .synopsis-content h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        /* Historical Context */
+        .historical-context {
+            background-color: var(--cream);
+            padding: 4rem 0;
+        }
+        
+        .context-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .context-content h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .featured-opera-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Australian<span>Opera</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="venues.html">Venues</a></li>
+                    <li><a href="performances.html">Performances</a></li>
+                    <li><a href="opera-info.html">Opera Info</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Opera Information</h1>
+            <p>Discover the stories, history, and context behind the world's greatest operas</p>
+        </div>
+    </section>
+
+    <!-- Featured Opera -->
+    <section class="featured-opera">
+        <div class="container">
+            <div class="featured-opera-content">
+                <div class="featured-opera-image" style="background-image: url('https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                <div class="featured-opera-text">
+                    <h2>La Traviata</h2>
+                    <p>Giuseppe Verdi's "La Traviata" is one of the most beloved and performed operas in the world. Based on Alexandre Dumas' play "La Dame aux Camélias," it tells the tragic story of the courtesan Violetta Valéry and her doomed love affair with Alfredo Germont.</p>
+                    
+                    <div class="opera-details">
+                        <div class="opera-detail">
+                            <strong>Composer:</strong>
+                            <span>Giuseppe Verdi</span>
+                        </div>
+                        <div class="opera-detail">
+                            <strong>Premiered:</strong>
+                            <span>March 6, 1853 at La Fenice in Venice, Italy</span>
+                        </div>
+                        <div class="opera-detail">
+                            <strong>Language:</strong>
+                            <span>Italian</span>
+                        </div>
+                        <div class="opera-detail">
+                            <strong>Setting:</strong>
+                            <span>Paris and its environs, around 1850</span>
+                        </div>
+                        <div class="opera-detail">
+                            <strong>Duration:</strong>
+                            <span>Approximately 2 hours and 30 minutes</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn">View Performances</a>
+                    <a href="#" class="btn btn-secondary">Read Full Synopsis</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opera Synopsis -->
+    <section class="opera-synopsis">
+        <div class="container">
+            <div class="synopsis-content">
+                <h2>Synopsis: La Traviata</h2>
+                
+                <h3>Act I</h3>
+                <p>Violetta Valéry, a famed courtesan, throws a lavish party at her Paris salon to celebrate her recovery from an illness. Gastone, a viscount, introduces her to Alfredo Germont, a young bourgeois from a provincial family who has long admired Violetta from afar. Alfredo raises a toast to Violetta, and she is touched by his genuine interest. As the guests move to the ballroom to dance, Violetta suffers a fainting spell. Alfredo stays behind and declares his love. At first, Violetta rejects him, saying that love means nothing to her. However, something about Alfredo's sincerity touches her, and she gives him a camellia, telling him to return when the flower has wilted. After the guests leave, Violetta wonders if Alfredo could be the man she could truly love.</p>
+                
+                <h3>Act II</h3>
+                <p>Three months later, Alfredo and Violetta are living together in a country house outside Paris. Violetta has abandoned her former life. Alfredo learns from the maid, Annina, that Violetta has been selling her possessions to support their lifestyle. Ashamed, he leaves for Paris to settle matters. While he is gone, Giorgio Germont, Alfredo's father, arrives and asks Violetta to end her relationship with his son. He explains that Violetta's reputation has threatened his daughter's engagement. Violetta is heartbroken but agrees, asking only that Alfredo's sister be told of her sacrifice after her death. She writes a farewell letter to Alfredo. When Alfredo returns, Violetta tells him she no longer loves him and is returning to her old life. Alfredo is devastated and his father attempts to comfort him, but Alfredo finds an invitation from Violetta's friend Flora and decides to confront Violetta at the party.</p>
+                
+                <h3>Act III</h3>
+                <p>At Flora's party, Alfredo publicly humiliates Violetta by throwing his gambling winnings at her feet as payment for her services. Giorgio Germont, who has followed his son, witnesses this and denounces Alfredo's behavior. Baron Douphol, Violetta's escort, challenges Alfredo to a duel. Six months later, Violetta is dying of consumption in her Paris apartment, attended only by Annina and Dr. Grenvil. She reads a letter from Giorgio Germont telling her that Alfredo knows of her sacrifice and is coming to beg her forgiveness. Alfredo arrives and the lovers are reunited, planning to leave Paris together. However, it is too late for Violetta, who dies in Alfredo's arms, declaring that her pain and suffering have ended.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historical Context -->
+    <section class="historical-context">
+        <div class="container">
+            <div class="context-content">
+                <h2>Historical Context</h2>
+                
+                <p>"La Traviata" premiered at La Fenice opera house in Venice on March 6, 1853. The opera was initially considered a failure, partly due to the casting of a soprano who was considered too old and overweight to play the consumptive Violetta. However, when it was revived a year later with a different cast, it became a great success.</p>
+                
+                <p>The opera was revolutionary for its time as it dealt with contemporary social issues rather than historical or mythological subjects. It portrayed the life of a courtesan, a subject considered scandalous for the opera stage in the mid-19th century. Verdi insisted on setting the opera in contemporary times, though the censors initially forced him to set it in the past to make it less controversial.</p>
+                
+                <p>"La Traviata" is based on the novel and play "La Dame aux Camélias" by Alexandre Dumas fils, which was in turn inspired by the real-life courtesan Marie Duplessis, with whom Dumas had a brief affair before her death from tuberculosis at the age of 23. The character of Violetta Valéry is based on Duplessis.</p>
+                
+                <p>The opera reflects the social attitudes of the time towards "fallen women" and the double standards applied to men and women in matters of morality. It also portrays the conflict between genuine love and the societal expectations of class and propriety.</p>
+                
+                <p>Musically, "La Traviata" represents Verdi's middle period and showcases his evolving style. It features some of his most beautiful and memorable melodies, including Violetta's aria "Sempre libera" and the duet "Un dì felice." The opera's emotional depth and psychological complexity mark it as one of Verdi's masterpieces.</p>
+                
+                <p>Today, "La Traviata" remains one of the most performed operas worldwide and continues to move audiences with its beautiful music and tragic love story.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Operas -->
+    <section class="opera-info-section">
+        <div class="container">
+            <h2 class="section-title">Explore More Operas</h2>
+            <div class="opera-info-grid">
+                <div class="opera-card">
+                    <div class="opera-image" style="background-image: url('https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="opera-content">
+                        <h3>La Traviata</h3>
+                        <div class="opera-meta">
+                            <span>Giuseppe Verdi</span>
+                            <span>1853</span>
+                        </div>
+                        <p>A tragic love story of a courtesan and a young man from a respectable family.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="opera-card">
+                    <div class="opera-image" style="background-image: url('https://images.unsplash.com/photo-1522776203873-a1f79e18234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="opera-content">
+                        <h3>Carmen</h3>
+                        <div class="opera-meta">
+                            <span>Georges Bizet</span>
+                            <span>1875</span>
+                        </div>
+                        <p>The story of the fiery gypsy Carmen and her tragic affair with Don José.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="opera-card">
+                    <div class="opera-image" style="background-image: url('https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="opera-content">
+                        <h3>The Magic Flute</h3>
+                        <div class="opera-meta">
+                            <span>Wolfgang Amadeus Mozart</span>
+                            <span>1791</span>
+                        </div>
+                        <p>A fairy tale adventure filled with magic, love, and wisdom.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="opera-card">
+                    <div class="opera-image" style="background-image: url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="opera-content">
+                        <h3>Madama Butterfly</h3>
+                        <div class="opera-meta">
+                            <span>Giacomo Puccini</span>
+                            <span>1904</span>
+                        </div>
+                        <p>The heartbreaking tale of a young Japanese geisha abandoned by her American husband.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="opera-card">
+                    <div class="opera-image" style="background-image: url('https://images.unsplash.com/photo-1522776203873-a1f79e18234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="opera-content">
+                        <h3>The Barber of Seville</h3>
+                        <div class="opera-meta">
+                            <span>Gioachino Rossini</span>
+                            <span>1816</span>
+                        </div>
+                        <p>A comic masterpiece about the clever barber Figaro helping Count Almaviva win his love.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="opera-card">
+                    <div class="opera-image" style="background-image: url('https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="opera-content">
+                        <h3>Don Giovanni</h3>
+                        <div class="opera-meta">
+                            <span>Wolfgang Amadeus Mozart</span>
+                            <span>1787</span>
+                        </div>
+                        <p>The tale of the legendary seducer Don Juan and his ultimate downfall.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Australian Opera</h3>
+                    <p>Your premier destination for opera tickets and information across Australia.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="performances.html">Performances</a></li>
+                        <li><a href="opera-info.html">Opera Info</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Venues</h3>
+                    <ul>
+                        <li><a href="#">Sydney Opera House</a></li>
+                        <li><a href="#">Arts Centre Melbourne</a></li>
+                        <li><a href="#">QPAC Brisbane</a></li>
+                        <li><a href="#">Capitol Theatre Sydney</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@australianopera.com</li>
+                        <li>Phone: (02) 1234 5678</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Australian Opera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
