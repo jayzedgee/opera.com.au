@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australian Opera - Homepage</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --dark: #222;
+            --light: #F5F5F5;
+            --cream: #FFF8E7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #6B0000;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #B8860B;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')  no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 60px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Featured Performances */
+        .featured {
+            padding: 5rem 0;
+            background-color: var(--cream);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+        
+        .performances {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .performance-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .performance-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            color: var(--primary);
+        }
+        
+        .performance-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Venues Section */
+        .venues {
+            padding: 5rem 0;
+        }
+        
+        .venue-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .venue-item {
+            position: relative;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .venue-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .venue-item:hover .venue-image {
+            transform: scale(1.1);
+        }
+        
+        .venue-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 15px;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .newsletter-form button {
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #ccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Australian<span>Opera</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="venues.html">Venues</a></li>
+                    <li><a href="performances.html">Performances</a></li>
+                    <li><a href="opera-info.html">Opera Info</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Experience the Magic of Opera in Australia</h1>
+            <p>Discover world-class performances at Australia's most prestigious venues</p>
+            <a href="performances.html" class="btn">Explore Performances</a>
+            <a href="venues.html" class="btn btn-secondary">Find Venues</a>
+        </div>
+    </section>
+
+    <!-- Featured Performances -->
+    <section class="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Performances</h2>
+            <div class="performances">
+                <div class="performance-card">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="card-content">
+                        <h3>La Traviata</h3>
+                        <div class="performance-meta">
+                            <span>Sydney Opera House</span>
+                            <span>May 15-30, 2025</span>
+                        </div>
+                        <p>Experience Verdi's masterpiece in a stunning new production featuring Australia's finest opera talents.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+                
+                <div class="performance-card">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1522776203873-a1f79e18234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="card-content">
+                        <h3>Carmen</h3>
+                        <div class="performance-meta">
+                            <span>Arts Centre Melbourne</span>
+                            <span>June 5-20, 2025</span>
+                        </div>
+                        <p>Bizet's fiery tale of passion and freedom comes to life in this vibrant production.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+                
+                <div class="performance-card">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') ;"></div>
+                    <div class="card-content">
+                        <h3>The Magic Flute</h3>
+                        <div class="performance-meta">
+                            <span>QPAC Brisbane</span>
+                            <span>July 10-25, 2025</span>
+                        </div>
+                        <p>Mozart's enchanting opera filled with magic, love, and wisdom in a spectacular production.</p>
+                        <a href="#" class="btn">Book Tickets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venues Section -->
+    <section class="venues">
+        <div class="container">
+            <h2 class="section-title">Explore Our Venues</h2>
+            <div class="venue-list">
+                <div class="venue-item">
+                    <img src="https://images.unsplash.com/photo-1513279922550-250c2129b13a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sydney Opera House" class="venue-image">
+                    <div class="venue-overlay">
+                        <h3>Sydney Opera House</h3>
+                    </div>
+                </div>
+                
+                <div class="venue-item">
+                    <img src="https://images.unsplash.com/photo-1494870363241-b5225be3dada?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Arts Centre Melbourne" class="venue-image">
+                    <div class="venue-overlay">
+                        <h3>Arts Centre Melbourne</h3>
+                    </div>
+                </div>
+                
+                <div class="venue-item">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="QPAC Brisbane" class="venue-image">
+                    <div class="venue-overlay">
+                        <h3>QPAC Brisbane</h3>
+                    </div>
+                </div>
+                
+                <div class="venue-item">
+                    <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Capitol Theatre Sydney" class="venue-image">
+                    <div class="venue-overlay">
+                        <h3>Capitol Theatre Sydney</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated with Latest Performances</h2>
+            <p>Subscribe to our newsletter for exclusive offers and updates</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Australian Opera</h3>
+                    <p>Your premier destination for opera tickets and information across Australia.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="venues.html">Venues</a></li>
+                        <li><a href="performances.html">Performances</a></li>
+                        <li><a href="opera-info.html">Opera Info</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Venues</h3>
+                    <ul>
+                        <li><a href="#">Sydney Opera House</a></li>
+                        <li><a href="#">Arts Centre Melbourne</a></li>
+                        <li><a href="#">QPAC Brisbane</a></li>
+                        <li><a href="#">Capitol Theatre Sydney</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>Email: info@australianopera.com</li>
+                        <li>Phone: (02)  1234 5678</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Australian Opera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
